@@ -135,19 +135,26 @@
     </div>
 
     <!-- Sambungan Rumah -->
-    <div class="mb-2 font-medium">Jumlah Sambungan Rumah</div>
-    <div class="mb-1">
-      Dengan Water Meter :
-      <input
-        id="sr_dengan_meter"
-        class="border-b border-black w-20 mx-1 mb-1"
-      />
-      SR;
-    </div>
-    <div class="mb-3">
-      Tanpa Water Meter :
-      <input id="sr_tanpa_meter" class="border-b border-black w-20 mx-1 mb-1" />
-      SR;
+    <div class="grid grid-cols-[220px_1fr] gap-y-2 mb-4">
+      <!-- Judul -->
+      <div class="font-medium">Jumlah Sambungan Rumah :</div>
+
+      <!-- Dengan Water Meter -->
+      <div class="flex items-center">
+        <span class="w-48">Dengan Water Meter :</span>
+        <input id="sr_dengan_meter" class="border-b border-black w-24 mx-2" />
+        <span>SR;</span>
+      </div>
+
+      <!-- Kosong biar sejajar -->
+      <div></div>
+
+      <!-- Tanpa Water Meter -->
+      <div class="flex items-center">
+        <span class="w-48">Tanpa Water Meter :</span>
+        <input id="sr_tanpa_meter" class="border-b border-black w-24 mx-2" />
+        <span>SR;</span>
+      </div>
     </div>
 
     <!-- Hidran -->
@@ -530,9 +537,15 @@
           ["", `${c("dana_banprov")} BanProv`, `${c("dana_desa")} Dana Desa`],
           ["", `${c("dana_lainnya")} Lainnya`, ""],
           [],
-          ["Jumlah Sambungan Rumah"],
-          ["Dengan Water Meter", v("sr_dengan_meter"), "SR;"],
-          ["Tanpa Water Meter", v("sr_tanpa_meter"), "SR;"],
+          [
+            [
+              "Jumlah Sambungan Rumah :",
+              "Dengan Water Meter :",
+              v("sr_dengan_meter"),
+              "SR;",
+            ],
+            ["", "Tanpa Water Meter :", v("sr_tanpa_meter"), "SR;"],
+          ],
           [],
           ["Jumlah Hidran Umum", v("jumlah_hidran"), "Unit"],
           [],
