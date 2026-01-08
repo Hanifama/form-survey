@@ -367,6 +367,16 @@
     </script>
 
     <script>
+      const safeFile = (text) =>
+        text
+          ? text
+              .trim()
+              .replace(/\s+/g, "_")
+              .replace(/[^a-zA-Z0-9_]/g, "")
+          : "unknown";
+    </script>
+
+    <script>
       function applyBorderExcelJS(sheet) {
         const setBorder = (cell, borderStyle) => {
           cell.border = {
@@ -616,8 +626,10 @@
 
         const buffer = await wb.xlsx.writeBuffer();
 
-        const fileName = `Form_Survei_Air_Bersih.xlsx`;
-        saveAs(new Blob([buffer]), fileName);
+        const kecamatan = safeFile(v("kecamatan"));
+        const desa = safeFile(v("desa"));
+
+        const fileName = `Form_Survei_Air_Bersih_${kecamatan}_${desa}.xlsx`;
       }
     </script>
   </body>
