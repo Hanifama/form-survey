@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Survei Air Bersih PDUTR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  </head>
+
+  <body class="font-sans text-sm m-8">
+    <h2 class="text-center underline text-lg font-semibold mb-6">
+      FORM SURVEI AIR BERSIH PDUTR
+    </h2>
+
+    <!-- Kecamatan & Desa -->
+    <div class="flex flex-wrap mb-2">
+      <div class="w-1/2 min-w-[300px]">
+        <span class="inline-block w-44">Kecamatan</span>:
+        <input id="kecamatan" class="border-b border-black w-40 ml-1 mb-1" />
+      </div>
+      <div class="w-1/2 min-w-[300px]">
+        <span class="inline-block w-44">Desa</span>:
+        <input id="desa" class="border-b border-black w-40 ml-1 mb-1" />
+      </div>
+    </div>
+
+    <!-- Jumlah -->
+    <div class="flex flex-wrap mb-2">
+      <div class="w-1/2 min-w-[300px]">
+        <span class="inline-block w-44">Jumlah Penduduk</span>:
+        <input
+          id="jumlah_penduduk"
+          type="number"
+          class="border-b border-black w-16 mx-1 mb-1"
+        />
+        Jiwa
+      </div>
+      <div class="w-1/2 min-w-[300px]">
+        <span class="inline-block w-44">Jumlah Rumah</span>:
+        <input
+          id="jumlah_rumah"
+          type="number"
+          class="border-b border-black w-16 mx-1 mb-1"
+        />
+        Unit
+      </div>
+    </div>
+
+    <!-- Berfungsi -->
+    <div class="mb-3">
+      <span class="inline-block w-44">Berfungsi</span>:
+      <label class="ml-2"><input id="berfungsi_ya" type="checkbox" /> Ya</label>
+      <label class="ml-4"
+        ><input id="berfungsi_tidak" type="checkbox" /> Tidak</label
+      >
+    </div>
+
+    <!-- Jenis Sarana -->
+    <div class="mb-3 flex">
+      <div class="w-44">Jenis Sarana Terbangun :</div>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+        <label
+          ><input id="sarana_perpipaan" type="checkbox" class="mr-1" />
+          Konstruksi Perpipaan</label
+        >
+        <label
+          ><input id="sarana_sumur_dangkal" type="checkbox" class="mr-1" />
+          Sumur Dangkal</label
+        >
+        <label
+          ><input id="sarana_sumur_dalam" type="checkbox" class="mr-1" /> Sumur
+          Dalam</label
+        >
+        <label
+          ><input id="sarana_lainnya" type="checkbox" class="mr-1" />
+          Lainnya</label
+        >
+      </div>
+    </div>
+
+    <!-- Lokasi -->
+    <div class="mb-2">
+      <span class="inline-block w-44">Lokasi Pembangunan</span>:
+      <input
+        id="lokasi_pembangunan"
+        class="border-b border-black w-72 mx-1 mb-1"
+      />
+      RT <input id="rt" class="border-b border-black w-10 mx-1 mb-1" /> RW
+      <input id="rw" class="border-b border-black w-10 mx-1 mb-1" />
+    </div>
+
+    <!-- Koordinat -->
+    <div class="mb-2">
+      <span class="inline-block w-44">Koordinat</span>: X
+      <input id="koordinat_x" class="border-b border-black w-36 mx-1 mb-1" />
+      Y <input id="koordinat_y" class="border-b border-black w-36 mx-1 mb-1" />
+    </div>
+
+    <!-- Tahun -->
+    <div class="mb-3">
+      <span class="inline-block w-44">Tahun Pembangunan</span>:
+      <input
+        id="tahun_pembangunan"
+        class="border-b border-black w-20 mx-1 mb-1"
+      />
+    </div>
+
+    <!-- Sumber Dana -->
+    <div class="mb-3 flex">
+      <div class="w-44">Sumber Dana :</div>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+        <label
+          ><input id="dana_apbd" type="checkbox" class="mr-1" /> APBD</label
+        >
+        <label><input id="dana_dal" type="checkbox" class="mr-1" /> DAL</label>
+        <label><input id="dana_dau" type="checkbox" class="mr-1" /> DAU</label>
+        <label
+          ><input id="dana_pamsimas" type="checkbox" class="mr-1" />
+          PAMSIMAS</label
+        >
+        <label
+          ><input id="dana_banprov" type="checkbox" class="mr-1" />
+          BanProv</label
+        >
+        <label
+          ><input id="dana_desa" type="checkbox" class="mr-1" /> Dana
+          Desa</label
+        >
+        <label class="col-span-2"
+          ><input id="dana_lainnya" type="checkbox" class="mr-1" />
+          Lainnya</label
+        >
+      </div>
+    </div>
+
+    <!-- Sambungan Rumah -->
+    <div class="mb-2 font-medium">Jumlah Sambungan Rumah</div>
+    <div class="mb-1">
+      Dengan Water Meter :
+      <input
+        id="sr_dengan_meter"
+        class="border-b border-black w-20 mx-1 mb-1"
+      />
+      SR;
+    </div>
+    <div class="mb-3">
+      Tanpa Water Meter :
+      <input id="sr_tanpa_meter" class="border-b border-black w-20 mx-1 mb-1" />
+      SR;
+    </div>
+
+    <!-- Hidran -->
+    <div class="mb-3">
+      <span class="inline-block w-44">Jumlah Hidran Umum</span>:
+      <input id="jumlah_hidran" class="border-b border-black w-20 mx-1 mb-1" />
+      Unit
+    </div>
+
+    <!-- Meter & Lab -->
+    <div class="mb-2">
+      <span class="inline-block w-44">Water Meter Induk</span>:
+      <label class="ml-2"
+        ><input id="meter_induk_ada" type="checkbox" /> Ada</label
+      >
+      <label class="ml-4"
+        ><input id="meter_induk_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-3">
+      <span class="inline-block w-44">Pemeriksaan Laboratorium</span>:
+      <label class="ml-2"> <input id="lab_ada" type="checkbox" /> Ada </label>
+      <label class="ml-4">
+        <input id="lab_tidak" type="checkbox" /> Tidak Ada
+      </label>
+      <span class="ml-4">Tahun:</span>
+      <input
+        id="lab_tahun"
+        type="text"
+        class="border-b border-black w-20 ml-1"
+      />
+    </div>
+
+    <!-- Kapasitas -->
+    <div class="mb-1">
+      <span class="inline-block w-44">Kapasitas Produksi</span>:
+      <input
+        id="kapasitas_produksi_ldtk"
+        class="border-b border-black w-16 mx-1 mb-1"
+      />
+      liter/detik /
+      <input
+        id="kapasitas_produksi_m3"
+        class="border-b border-black w-16 mx-1 mb-1"
+      />
+      m³/bulan
+    </div>
+
+    <div class="mb-1">
+      <span class="inline-block w-44">Kapasitas Distribusi</span>:
+      <input
+        id="kapasitas_distribusi"
+        class="border-b border-black w-16 mx-1 mb-1"
+      />
+      liter/detik
+    </div>
+
+    <div class="mb-3">
+      <span class="inline-block w-44">Kapasitas Air Terjual</span>:
+      <input
+        id="kapasitas_terjual"
+        class="border-b border-black w-16 mx-1 mb-1"
+      />
+      liter/detik
+    </div>
+
+    <!-- Jenis Pengelola -->
+    <div class="mb-3 flex items-center">
+      <div class="w-44">Jenis Pengelola :</div>
+      <div class="flex items-center gap-6">
+        <label
+          ><input id="pengelola_kpspam" type="checkbox" class="mr-1" />
+          KPSPAM</label
+        >
+        <label
+          ><input id="pengelola_bumdes" type="checkbox" class="mr-1" />
+          BUMDes</label
+        >
+        <label>
+          <input id="pengelola_lainnya" type="checkbox" class="mr-1" /> Lainnya
+          <input
+            id="pengelola_lainnya_text"
+            type="text"
+            class="ml-2 w-40 border-b border-black focus:outline-none"
+          />
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-1">
+      <span class="inline-block w-44">Nama Kelompok Pengelola</span>:
+      <input id="nama_kelompok" class="border-b border-black w-72 mx-1 mb-1" />
+    </div>
+
+    <div class="mb-1">
+      <span class="inline-block w-44">Nama Pengelola</span>:
+      <input id="nama_pengelola" class="border-b border-black w-72 mx-1 mb-1" />
+    </div>
+
+    <div class="mb-1">
+      <span class="inline-block w-44">Nomor Telp</span>:
+      <input id="nomor_telp" class="border-b border-black w-40 mx-1 mb-1" />
+    </div>
+
+    <div class="mb-3">
+      <span class="inline-block w-44">Nomor SK Pengelola</span>:
+      <input id="nomor_sk" class="border-b border-black w-40 mx-1 mb-1" />
+    </div>
+
+    <!-- Administrasi -->
+    <div class="mb-2">
+      <span class="inline-block w-44">AD/ART</span>:
+      <label class="ml-2"><input id="adart_ada" type="checkbox" /> Ada</label>
+      <label class="ml-4"
+        ><input id="adart_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Pencatatan Data Pelanggan</span>:
+      <label class="ml-2"
+        ><input id="pelanggan_ada" type="checkbox" /> Ada</label
+      >
+      <label class="ml-4"
+        ><input id="pelanggan_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Laporan Bulanan</span>:
+      <label class="ml-2"
+        ><input id="laporan_bulanan_ada" type="checkbox" /> Ada</label
+      >
+      <label class="ml-4"
+        ><input id="laporan_bulanan_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Buku Rugi / Laba</span>:
+      <label class="ml-2"
+        ><input id="rugi_laba_ada" type="checkbox" /> Ada</label
+      >
+      <label class="ml-4"
+        ><input id="rugi_laba_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">LPJ Pengurus</span>:
+      <label class="ml-2"><input id="lpj_ada" type="checkbox" /> Ada</label>
+      <label class="ml-4"
+        ><input id="lpj_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Laporan Kegiatan</span>:
+      <label class="ml-2"
+        ><input id="laporan_kegiatan_ada" type="checkbox" /> Ada</label
+      >
+      <label class="ml-4"
+        ><input id="laporan_kegiatan_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Tarif</span>:
+      <label class="ml-2"><input id="tarif_ada" type="checkbox" /> Ada</label>
+      <label class="ml-4"
+        ><input id="tarif_tidak" type="checkbox" /> Tidak Ada</label
+      >
+    </div>
+
+    <div class="mb-2">
+      <span class="inline-block w-44">Jenis</span>:
+      <label class="ml-2"><input id="tarif_flat" type="checkbox" /> Flat</label>
+      <label class="ml-2"
+        ><input id="tarif_progresif" type="checkbox" /> Progresif</label
+      >
+      <label class="ml-2"
+        ><input id="tarif_abonemen" type="checkbox" /> Abonemen</label
+      >
+      Rp
+      <input id="tarif_bulanan" class="border-b border-black w-20 mx-1 mb-1" />
+      /bulan
+    </div>
+
+    <div class="mb-8">
+      <span class="inline-block w-44">Tarif per m³</span>: Rp
+      <input id="tarif_per_m3" class="border-b border-black w-20 mx-1 mb-1" />
+    </div>
+
+    <!-- TTD -->
+    <div class="flex justify-between mt-10">
+      <div class="text-center w-48">
+        Koordinator<br /><br /><br />
+        (__________________)
+      </div>
+      <div class="text-center w-48">
+        Surveyor<br /><br /><br />
+        (__________________)
+      </div>
+
+      <button
+        onclick="exportExcel()"
+        class="px-4 py-2 bg-green-600 text-white rounded"
+      >
+        Export ke Excel
+      </button>
+    </div>
+
+    <script>
+      const v = (id) => document.getElementById(id)?.value || "";
+      const c = (id) => (document.getElementById(id)?.checked ? "☑" : "☐");
+    </script>
+
+    <script>
+      function applyBorderExcelJS(sheet) {
+        const setBorder = (cell, borderStyle) => {
+          cell.border = {
+            ...(cell.border || {}),
+            ...borderStyle,
+          };
+        };
+
+        const hasValue = (cell) => {
+          if (cell.value === null || cell.value === undefined) return false;
+          if (typeof cell.value === "string" && cell.value.trim() === "")
+            return false;
+          return true;
+        };
+
+        sheet.eachRow((row, rowNumber) => {
+          row.eachCell((cell, colNumber) => {
+            // ❌ SKIP BORDER kalau cell kosong
+            if (!hasValue(cell)) return;
+
+            // === BORDER DASAR (HANYA YANG ADA ISI)
+            setBorder(cell, {
+              top: { style: "thin" },
+              left: { style: "thin" },
+              bottom: { style: "thin" },
+              right: { style: "thin" },
+            });
+
+            cell.alignment = {
+              vertical: "middle",
+              wrapText: true,
+            };
+
+            cell.font = {
+              name: "Calibri",
+              size: 11,
+            };
+
+            // === JUDUL
+            if (rowNumber === 1) {
+              cell.font = { name: "Calibri", size: 12, bold: true };
+              cell.alignment = {
+                horizontal: "center",
+                vertical: "middle",
+              };
+            }
+
+            // === KOLOM LABEL (A)
+            if (colNumber === 1) {
+              setBorder(cell, {
+                left: { style: "medium" },
+              });
+            }
+          });
+        });
+
+        // === BORDER LUAR (TETAP, TAPI HANYA JIKA CELL ADA ISI)
+        const lastRow = sheet.rowCount;
+        const lastCol = sheet.columnCount;
+
+        sheet.getRow(1).eachCell((cell) => {
+          if (hasValue(cell)) {
+            setBorder(cell, { top: { style: "medium" } });
+          }
+        });
+
+        sheet.getRow(lastRow).eachCell((cell) => {
+          if (hasValue(cell)) {
+            setBorder(cell, { bottom: { style: "medium" } });
+          }
+        });
+
+        for (let r = 1; r <= lastRow; r++) {
+          const firstCell = sheet.getCell(r, 1);
+          const lastCell = sheet.getCell(r, lastCol);
+
+          if (hasValue(firstCell)) {
+            setBorder(firstCell, { left: { style: "medium" } });
+          }
+
+          if (hasValue(lastCell)) {
+            setBorder(lastCell, { right: { style: "medium" } });
+          }
+        }
+      }
+    </script>
+
+    <script>
+      async function exportExcel() {
+        const wb = new ExcelJS.Workbook();
+        const sheet = wb.addWorksheet("Form Survei");
+
+        const rows = [
+          ["FORM SURVEI AIR BERSIH PDUTR"],
+          [],
+          ["Kecamatan", v("kecamatan"), "", "Desa", v("desa")],
+          [
+            "Jumlah Penduduk",
+            v("jumlah_penduduk"),
+            "Jiwa",
+            "Jumlah Rumah",
+            v("jumlah_rumah"),
+            "Unit",
+          ],
+          [],
+          [
+            "Berfungsi",
+            `${c("berfungsi_ya")} Ya`,
+            `${c("berfungsi_tidak")} Tidak`,
+          ],
+          [],
+          [
+            "Jenis Sarana Terbangun",
+            `${c("sarana_perpipaan")} Konstruksi Perpipaan`,
+            `${c("sarana_sumur_dangkal")} Sumur Dangkal`,
+          ],
+          [
+            "",
+            `${c("sarana_sumur_dalam")} Sumur Dalam`,
+            `${c("sarana_lainnya")} Lainnya`,
+          ],
+          [],
+          [],
+          [
+            "Lokasi Pembangunan",
+            "Kp.",
+            v("lokasi_pembangunan"),
+            "",
+            "RT",
+            v("rt"),
+            "RW",
+            v("rw"),
+          ],
+          ["Koordinat", "X", v("koordinat_x"), "", "Y", v("koordinat_y"), ""],
+          ["Tahun Pembangunan", v("tahun_pembangunan")],
+          [],
+          ["Sumber Dana", `${c("dana_apbd")} APBD`, `${c("dana_dal")} DAL`],
+          ["", `${c("dana_dau")} DAU`, `${c("dana_pamsimas")} PAMSIMAS`],
+          ["", `${c("dana_banprov")} BanProv`, `${c("dana_desa")} Dana Desa`],
+          ["", `${c("dana_lainnya")} Lainnya`, ""],
+          [],
+          ["Jumlah Sambungan Rumah"],
+          ["Dengan Water Meter", v("sr_dengan_meter"), "SR;"],
+          ["Tanpa Water Meter", v("sr_tanpa_meter"), "SR;"],
+          [],
+          ["Jumlah Hidran Umum", v("jumlah_hidran"), "Unit"],
+          [],
+          [
+            "Water Meter Induk",
+            `${c("meter_induk_ada")} Ada`,
+            `${c("meter_induk_tidak")} Tidak Ada`,
+          ],
+          [
+            "Pemeriksaan Laboratorium",
+            `${c("lab_ada")} Ada`,
+            `${c("lab_tidak")} Tidak Ada`,
+            "Tahun",
+            v("lab_tahun"),
+          ],
+          [],
+          [
+            "Kapasitas Produksi",
+            v("kapasitas_produksi_ldtk"),
+            "liter/detik",
+            "",
+            v("kapasitas_produksi_m3"),
+            "m³/bulan",
+          ],
+          ["Kapasitas Distribusi", v("kapasitas_distribusi"), "liter/detik"],
+          ["Kapasitas Air Terjual", v("kapasitas_terjual"), "liter/detik"],
+          [],
+          [
+            "Jenis Pengelola",
+            `${c("pengelola_kpspam")} KPSPAM`,
+            `${c("pengelola_bumdes")} BUMDes`,
+            `${c("pengelola_lainnya")} Lainnya (${v(
+              "pengelola_lainnya_text"
+            )})`,
+          ],
+          ["Nama Kelompok Pengelola", v("nama_kelompok")],
+          ["Nama Pengelola", v("nama_pengelola")],
+          ["Nomor Telp", v("nomor_telp")],
+          ["Nomor SK Pengelola", v("nomor_sk")],
+          [],
+          ["AD/ART", `${c("adart_ada")} Ada`, `${c("adart_tidak")} Tidak Ada`],
+
+          [
+            "Pencatatan Data Pelanggan",
+            `${c("pelanggan_ada")} Ada`,
+            `${c("pelanggan_tidak")} Tidak Ada`,
+          ],
+
+          [
+            "Laporan Bulanan",
+            `${c("laporan_bulanan_ada")} Ada`,
+            `${c("laporan_bulanan_tidak")} Tidak Ada`,
+          ],
+
+          [
+            "Buku Rugi / Laba",
+            `${c("rugi_laba_ada")} Ada`,
+            `${c("rugi_laba_tidak")} Tidak Ada`,
+          ],
+
+          [
+            "LPJ Pengurus",
+            `${c("lpj_ada")} Ada`,
+            `${c("lpj_tidak")} Tidak Ada`,
+          ],
+
+          [
+            "Laporan Kegiatan",
+            `${c("laporan_kegiatan_ada")} Ada`,
+            `${c("laporan_kegiatan_tidak")} Tidak Ada`,
+          ],
+          ["Tarif", `${c("tarif_ada")} Ada`, `${c("tarif_tidak")} Tidak Ada`],
+          [
+            "Jenis Tarif",
+            `${c("tarif_flat")} Flat`,
+            `${c("tarif_progresif")} Progresif`,
+            `${c("tarif_abonemen")} Abonemen`,
+            `Rp. ${v("tarif_bulanan")}/bulan`,
+          ],
+          ["Tarif per m³", `Rp. ${v("tarif_per_m3")}/bulan`],
+          [],
+          ["Koordinator", "", "", "Surveyor"],
+        ];
+
+        rows.forEach((r) => sheet.addRow(r));
+
+        // === MERGE (SAMA DENGAN XLSX)
+        sheet.mergeCells("A1:G1");
+        sheet.mergeCells("A8:A9");
+
+        // === COLUMN WIDTH
+        sheet.columns = [
+          { width: 30 },
+          { width: 15 },
+          { width: 12 },
+          { width: 15 },
+          { width: 15 },
+          { width: 12 },
+          { width: 12 },
+        ];
+
+        applyBorderExcelJS(sheet);
+
+        const buffer = await wb.xlsx.writeBuffer();
+
+        const fileName = `Form_Survei_Air_Bersih.xlsx`;
+        saveAs(new Blob([buffer]), fileName);
+      }
+    </script>
+  </body>
+</html>
