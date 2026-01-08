@@ -338,8 +338,12 @@
     </div>
 
     <div class="mb-8">
-      <span class="inline-block w-44">Tarif per m³</span>: Rp
-      <input id="tarif_per_m3" class="border-b border-black w-20 mx-1 mb-1" />
+      <span class="inline-block w-44">Tarif per meter kubik</span>: Rp
+      <input
+        id="tarif_per_m3"
+        class="border-b border-black w-20 mx-1 mb-1"
+        placeholder="........./m³"
+      />
     </div>
 
     <!-- TTD -->
@@ -600,7 +604,7 @@
             `${c("tarif_abonemen")} Abonemen`,
             `Rp. ${v("tarif_bulanan")}/bulan`,
           ],
-          ["Tarif per m³", `Rp. ${v("tarif_per_m3")}/bulan`],
+          ["Tarif per meter kubik", `Rp. ${v("tarif_per_m3")}/m³`],
           [],
           ["Koordinator", "", "", "Surveyor"],
         ];
